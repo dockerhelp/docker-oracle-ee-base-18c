@@ -2,9 +2,10 @@
 
 set -e
 
-$1 = $HOME/docker-oracle-ee-base-18c/install/oracle-18c-ee.rsp
+RSP = $HOME/docker-oracle-ee-base-18c/install/oracle-18c-ee.rsp
 
 groupadd dba && useradd -m -G dba oracle
+rm -rf /u01
 mkdir /u01 && mkdir -p /u01/app/oracle/product/18.0.0/dbhome_1 && chown -R oracle:dba /u01 && chmod -R 775 /u01
 
 #Download oracle database zip
@@ -16,7 +17,7 @@ su oracle -c 'unzip -q /oracle_database.zip -d /u01/app/oracle/product/18.0.0/db
 rm -f /oracle_database.zip
 
 #Run installer
-#su oracle -c "cd /u01/app/oracle/product/18.0.0/dbhome_1 && ./runInstaller -skipPrereqs -silent -responseFile $1 -waitForCompletion"
+#su oracle -c "cd /u01/app/oracle/product/18.0.0/dbhome_1 && ./runInstaller -skipPrereqs -silent -responseFile $RSP -waitForCompletion"
 #Run Root.sh
 /u01/app/oraInventory/orainstRoot.sh > /dev/null 2>&1
 echo | /u01/app/oracle/product/18.0.0/dbhome_1/root.sh > /dev/null 2>&1 || true
