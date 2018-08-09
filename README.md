@@ -1,3 +1,1 @@
-# docker-oracle-ee-18c
-# docker-oracle-ee-base-18c
-# docker-oracle-ee-base-18c
+# Installing Oracle 18c Home
