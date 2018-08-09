@@ -18,12 +18,19 @@ wget -q --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=downl
 echo "Extracting oracle database zip"
 su oracle -c 'unzip -q /oracle_database.zip -d /u01/app/oracle/product/18.0.0/dbhome_1/'
 rm -f /oracle_database.zip
+cp $HOME/docker-oracle-ee-base-18c/install/oracle-18c-ee.rsp $ORACLE_HOME/oracle-18c-ee.rsp
+cp $HOME/docker-oracle-ee-base-18c/install/oracle-18c-ee.rsp $ORACLE_HOME/dbca-18c.rsp
+chmod 777 $ORACLE_HOME/oracle-18c-ee.rsp
+chmod 777 $ORACLE_HOME/dbca-18c.rsp
 
 #Run installer
 #su oracle -c "cd $ORACLE_HOME && ./runInstaller -skipPrereqs -silent -responseFile $RSP -waitForCompletion"
 #Run Root.sh
 /u01/app/oraInventory/orainstRoot.sh > /dev/null 2>&1
 echo | /u01/app/oracle/product/18.0.0/dbhome_1/root.sh > /dev/null 2>&1 || true
+#database installation
+echo "Default 18c database install with PDB"
+dbca -silent -createDatabase -responseFile $ORACLE_HOME/dbca-18c.rsp
 #Cleanup
 echo "Cleaning up"
 #rm -rf /home/oracle/database /tmp/*
