@@ -17,6 +17,9 @@ rm -f /oracle_database.zip
 
 #Run installer
 #su oracle -c "cd /u01/app/oracle/product/18.0.0/dbhome_1 && ./runInstaller -skipPrereqs -silent -responseFile $1 -waitForCompletion"
+#Run Root.sh
+/u01/app/oraInventory/orainstRoot.sh > /dev/null 2>&1
+echo | /u01/app/oracle/product/18.0.0/dbhome_1/root.sh > /dev/null 2>&1 || true
 #Cleanup
 echo "Cleaning up"
 #rm -rf /home/oracle/database /tmp/*
