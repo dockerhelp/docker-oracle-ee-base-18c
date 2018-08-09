@@ -13,12 +13,6 @@ echo oracle:oracle | chpasswd
 export ORACLE_BASE=/u01/app/oracle
 export ORACLE_HOME=/u01/app/oracle/product/18.0.0/dbhome_1
 
-groupadd dba && useradd -m -G dba oracle
-rm -rf /u01
-mkdir /u01 && mkdir -p /u01/app/oracle/product/18.0.0/dbhome_1 && chown -R oracle:dba /u01 && chmod -R 775 /u01
-echo oracle:oracle | chpasswd
-export ORACLE_BASE=/u01/app/oracle
-export ORACLE_HOME=/u01/app/oracle/product/18.0.0/dbhome_1
 
 #Download oracle database zip
 echo "Downloading oracle database zip"
